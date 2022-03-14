@@ -17,6 +17,14 @@ Contraintes :
 
 Hypothèses :
 	
-	- Chaque robot connait la position des autres
+	- Chaque robot connait la position des autres de leur point de vue (leur référenciel)
 	- Les robots peuvent communiquer (optionnel)
+			 
+Méthode :
+	
+	- Chaque robot calcule les distances entre chacun.
+	- On prend les deux robots les plus éloignés.
+	- On se sert de la droite entre ces deux robots.
+	- Chaque robot calcule la distance vers la droite et se place dessus. (tourne puis avance)
+
 			 

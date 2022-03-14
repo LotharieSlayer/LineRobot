@@ -28,3 +28,6 @@ Méthode :
 	- Chaque robot calcule la distance vers la droite et se place dessus. (tourne puis avance)
 
 			 
+Chaque robot serveur/client communique ensemble.
+Le GUI ne fait que récupérer les données que ce transmettent entre les robots.
+Les robots communique en UDP. (cf. voir après la page 24 du cours)

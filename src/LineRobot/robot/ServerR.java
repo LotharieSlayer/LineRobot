@@ -25,8 +25,11 @@ public class ServerR {
     }
 
     public String getMessage() throws IOException {
-        DatagramPacket msg = new DatagramPacket(new byte[512], 512);
-        ms.receive(msg);
+        DatagramPacket msg;
+        do {
+            msg = new DatagramPacket(new byte[512], 512);
+            ms.receive(msg);
+        } while (!new String(msg.getData()).startsWith("lineRobot:"));
         return new String(msg.getData());
     }
 }

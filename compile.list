@@ -9,7 +9,6 @@
 ./src/LineRobot/robot/ThreadR.java
 
 ./src/LineRobot/gui/GraphFrame.java
-./src/LineRobot/gui/TraceFrame.java
 
 ./src/LineRobot/gui/panels/GraphPanel.java
 ./src/LineRobot/gui/panels/TracePanel.java

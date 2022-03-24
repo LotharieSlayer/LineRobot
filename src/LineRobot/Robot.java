@@ -13,10 +13,10 @@ public class Robot {
 
     public static void main (String[] args){
         ThreadR t1, t2, t3, t4;
-        t1 = new ThreadR(10, 10);
-        t2 = new ThreadR(0, 0);
-        t3 = new ThreadR(-10, -10);
-        t4 = new ThreadR(-5,5);
+        t1 = new ThreadR();
+        t2 = new ThreadR();
+        t3 = new ThreadR();
+        t4 = new ThreadR();
         ArrayList<ThreadR> alRobots = new ArrayList<ThreadR>();
         alRobots.add(t1);
         alRobots.add(t2);
@@ -24,6 +24,7 @@ public class Robot {
         alRobots.add(t4);
 
         System.out.println(ThreadR.droitePrincipale(alRobots) + " distance entre " + ThreadR.rBougePas[0].getX() + " et " + ThreadR.rBougePas[1].getX());
+        System.out.println(730%360);
     }
 }
 

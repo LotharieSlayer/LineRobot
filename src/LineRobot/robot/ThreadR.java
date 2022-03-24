@@ -8,15 +8,18 @@ import java.util.ArrayList;
 public class ThreadR extends Thread{
     private double posx;
     private double posy;
+    private double rot;
     public static ThreadR[] rBougePas = new ThreadR[2];
 
-    public ThreadR(double x, double y){
-        this.posx = x;
-        this.posy = y;
+    public ThreadR(){
+        this.posx = Math.random()*500;
+        this.posy = Math.random()*500;
+        this.rot  = Math.random()*360;
     }
 
-    public double getX(){ return this.posx; }
-    public double getY(){ return this.posy; }
+    public double getX()  { return this.posx; }
+    public double getY()  { return this.posy; }
+    public double getRot(){ return this.rot ; }
 
     public static double droitePrincipale(ArrayList<ThreadR> listeRobot){
         ArrayList<ThreadR> liste2 = new ArrayList<ThreadR>();

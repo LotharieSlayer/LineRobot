@@ -31,3 +31,7 @@ Méthode :
 Chaque robot serveur/client communique ensemble.
 Le GUI ne fait que récupérer les données que ce transmettent entre les robots.
 Les robots communique en UDP. (cf. voir après la page 24 du cours)
+
+### Exécuter (Windows & Linux) :
+
+All in one (se placer dans le dossier /bin puis exécuter) : `cd .. && javac "@compile.list" && cd bin && java LineRobot.MainActivity`

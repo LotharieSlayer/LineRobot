@@ -29,8 +29,4 @@ public class ServerR {
         ms.receive(msg);
         return new String(msg.getData());
     }
-
-    public static void main(String[] args) throws IOException {
-        new ServerR();
-    }
 }

@@ -27,7 +27,7 @@ public class SocketR implements Closeable{
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.message = "lineRobot:"+message;
     }
 
     public void sendMessage() throws IOException{
@@ -38,15 +38,5 @@ public class SocketR implements Closeable{
     @Override
     public void close() throws IOException {
         ms.close();
-    }
-
-    public static void main(String[] args) {
-
-        try (SocketR socketR = new SocketR();) {
-            socketR.setMessage("testa");
-            while(true){
-                socketR.sendMessage();
-            }
-        } catch (Exception e) {}
     }
 }

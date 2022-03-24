@@ -1,10 +1,25 @@
 package LineRobot;
 
+import java.io.IOException;
+
+import LineRobot.gui.GraphFrame;
+
 public class MainActivity {
-    private 
-    public static void main(String[] args) {
-        
+    private static MainActivity instance;
+    public MainActivity() throws IOException
+	{
+		instance = this;
+        GraphFrame graph = new GraphFrame(instance);
     }
+
+/**
+ * Démarrage
+ * @param args Fichier à prendre en paramètre (si c'est Exemple1.algo, alors ce sera Exemple1 à entrer)
+ * @throws Exception
+ */
+	public static void main (String[] args) throws Exception{
+		new MainActivity();
+	}
 }
 
 // lance le gui + les x robots

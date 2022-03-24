@@ -2,8 +2,6 @@ package LineRobot.robot;
 
 import java.util.ArrayList;
 
-import LineRobot.Robot;
-
 /**
  * Chaque Thread de robot qui permettra au robot d'exister.
  */

@@ -77,8 +77,10 @@ public class Robot {
     }
 
     public void setNumRobot(int numRobot) {
-        idRobot = numRobot;
-        nbRobotMax = numRobot;
+        if(numRobot > idRobot){
+            idRobot = numRobot;
+            nbRobotMax = numRobot;
+        }
     }
 
     public double calculDroite(HashMap<Integer, double[]> coords) {

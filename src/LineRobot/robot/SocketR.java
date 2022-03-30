@@ -15,28 +15,30 @@ public class SocketR implements Closeable{
     
     private final static int PORT = 1312;
 
-    private String message;
     private InetAddress mcast;
     private static MulticastSocket ms;
 
     public SocketR() {
+            try {
+                ms = new MulticastSocket();
+                mcast  = InetAddress.getByName("225.1.1.1");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+
+    public void sendMessage(String message) {
+        String trame = "lineRobot:"+message;
+        DatagramPacket dp  = new DatagramPacket(trame.getBytes(),trame.length(), mcast, PORT);
         try {
-            ms = new MulticastSocket();
-            mcast  = InetAddress.getByName("225.1.1.1");
-        } catch (IOException e) {e.printStackTrace();}
-    }
-
-    public void setMessage(String message) {
-        this.message = "lineRobot:"+message;
-    }
-
-    public void sendMessage() throws IOException{
-        DatagramPacket dp  = new DatagramPacket(message.getBytes(),message.length(), mcast, PORT);
-        ms.send(dp);
+            ms.send(dp);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         ms.close();
     }
 }

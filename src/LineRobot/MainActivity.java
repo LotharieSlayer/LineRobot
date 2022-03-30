@@ -3,13 +3,15 @@ package LineRobot;
 import java.io.IOException;
 
 import LineRobot.gui.GraphFrame;
+import LineRobot.robot.Robot;
 
 public class MainActivity {
     private static MainActivity instance;
     public MainActivity() throws IOException
 	{
 		instance = this;
-        GraphFrame graph = new GraphFrame(instance);
+		new Robot();
+        //GraphFrame graph = new GraphFrame(instance);
     }
 
 /**

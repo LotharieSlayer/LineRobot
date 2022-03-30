@@ -17,19 +17,27 @@ public class ServerR {
     private InetAddress mcast;
     private MulticastSocket ms;
 
-    public ServerR() throws IOException {
+    public ServerR()  {
 
-        mcast = InetAddress.getByName("225.1.1.1");
-        ms = new MulticastSocket(PORT);
-        ms.joinGroup(mcast);
+        try {
+            mcast = InetAddress.getByName("225.1.1.1");
+            ms = new MulticastSocket(PORT);
+            ms.joinGroup(mcast);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public String getMessage() throws IOException {
+    public String getMessage() {
         DatagramPacket msg;
         do {
             msg = new DatagramPacket(new byte[512], 512);
-            ms.receive(msg);
+            try {
+                ms.receive(msg);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } while (!new String(msg.getData()).startsWith("lineRobot:"));
-        return new String(msg.getData());
+        return new String(msg.getData()).substring("lineRobot:".length());
     }
 }

@@ -38,26 +38,27 @@ public class Robot {
         this.posy    = Math.random()*500;
         this.rot     = Math.random()*360;
 
-       sendMessage("nouveau");
+        sendMessage("nouveau");
 
-       try { Thread.sleep(100); } catch (InterruptedException e) {}
+        //try { Thread.sleep(100); } catch (InterruptedException e) {}
+        
+        if( nbRobotMax < 2) {
+            sendMessage("coordonnee");
 
-       sendMessage("coordonnee");
+            // try { Thread.sleep(100); } catch (InterruptedException e) {}
 
-       try { Thread.sleep(1000); } catch (InterruptedException e) {}
-       
-       while (nbRobotMax < 2) {}
+            // sendMessage("droite");
 
-       sendMessage("droite");
+            // try { Thread.sleep(100); } catch (InterruptedException e) {}
 
-       try { Thread.sleep(100); } catch (InterruptedException e) {}
-
-       double[] resultat = new Calcul(coordPoint1[0], coordPoint2[0], coordPoint1[1], coordPoint2[1]).calculPoints();
-       pointFinalx = resultat[0];
-       pointFinaly = resultat[1];
+            // double[] resultat = new Calcul(coordPoint1[0], coordPoint2[0], coordPoint1[1], coordPoint2[1]).calculPoints();
+            // pointFinalx = resultat[0];
+            // pointFinaly = resultat[1];
+        }
     }
 
     public void sendMessage(String message) {
+        try { Thread.sleep(100); } catch (InterruptedException e) {}
         client.sendMessage("id:"+idRobot+";"+message);
     }
 
@@ -76,7 +77,8 @@ public class Robot {
         return nbRobotMax;
     }
 
-    public void setNumRobot(int numRobot) {
+    public synchronized void setNumRobot(int numRobot) {
+        System.out.println(numRobot);
         if(numRobot > idRobot){
             idRobot = numRobot;
             nbRobotMax = numRobot;

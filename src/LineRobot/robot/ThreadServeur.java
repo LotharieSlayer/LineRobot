@@ -24,10 +24,12 @@ public class ThreadServeur extends Thread{
         while (true) {
             String message = serveur.getMessage();
             String[] args = message.split(";");
+            System.out.println("---------------------------------------------");
+            System.out.println(message);
             if(args[1].contains("nouveau") ) {
                 robot.sendMessage("to:"+ args[0].split(":")[1] +";num="+(robot.getTotalRobotCo()+1));
             }
-            if(robot.getIdRobot() != Integer.parseInt(args[0].split(":")[1])) {
+            if(robot.getIdRobot() == -1 || robot.getIdRobot() != Integer.parseInt(args[0].split(":")[1])) {
                 if(args[1].contains("coordonnee")){
                     robot.sendMessage("to:"+ args[0].split(":")[1] + ";Coord=X:"+robot.getX()+"|Y:"+robot.getY());
                     if(robot.getTotalRobotCo() >= 2) {
@@ -66,6 +68,7 @@ public class ThreadServeur extends Thread{
                             nombreRecu++;
                             if(nombreRecu == 2) {
                                 robot.setCoordDroite(alcoords.get(0)[0], alcoords.get(0)[1], alcoords.get(1)[0], alcoords.get(1)[1]);
+                                nombreRecu = 0;
                             }
                         }
                     }

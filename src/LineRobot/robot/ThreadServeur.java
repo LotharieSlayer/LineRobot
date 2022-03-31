@@ -34,7 +34,7 @@ public class ThreadServeur extends Thread{
 
             if(args[1].contains("existe")) {
                 if(robot.getIdRobot() == 1 && robot.getMillieuDroite() != null)
-                robot.sendMessage("to:"+ args[0].split(":")[1] +";droite;X:" + robot.getMillieuDroite().getX() + ";Y:" + robot.getMillieuDroite().getY());
+                robot.sendMessage("to:"+ args[0].split(":")[1] +";droite;X1:" + robot.getPointDroite1().getX() + ";Y1:" + robot.getPointDroite1().getX() + ";X2:" + robot.getPointDroite2().getX() + ";Y2:" + robot.getPointDroite2().getY());
             }
 
 
@@ -64,9 +64,11 @@ public class ThreadServeur extends Thread{
                             }
                             if(args[2].startsWith("droite")){
                                 System.out.println("aa");
-                                double x = Double.parseDouble(args[3].split(":")[1]);
-                                double y = Double.parseDouble(args[4].split(":")[1]);
-                                robot.setCoordsmidDroite(x,y);
+                                double x1 = Double.parseDouble(args[3].split(":")[1]);
+                                double y1 = Double.parseDouble(args[4].split(":")[1]);
+                                double x2 = Double.parseDouble(args[5].split(":")[1]);
+                                double y2 = Double.parseDouble(args[6].split(":")[1]);
+                                robot.getPointDroite(x1, y1, x2, y2);
                             }
                         }
                     }

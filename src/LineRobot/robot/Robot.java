@@ -63,19 +63,6 @@ public class Robot {
         thR.run();
     }
 
-	/*public void setCoordsRobots(HashMap<Integer, double[]> coordsRobots) {
-		this.coordsRobots = coordsRobots;
-        this.coordsRobots.put(idRobot, new double[]{posx,posy});
-        for (Entry<Integer, double[]> d : coordsRobots.entrySet()) {
-            System.out.println("id="+d.getKey() +"||" + d.getValue()[0] + "|" + d.getValue()[1]);
-        }
-
-        if(nbRobotMax >= 3) {
-            calculDroite(this.coordsRobots);
-            sendMessage("droite");
-        }
-	}*/
-
     public void sendMessage(String message) {
         client.sendMessage("id:"+idRobot+";"+message);
     }
@@ -129,34 +116,23 @@ public class Robot {
         millieuDroite = new Point(x, y);
     }
 
-    /*public double calculDroite(HashMap<Integer, double[]> coords) {
-        HashMap<Integer, double[]> coord2 = (HashMap<Integer, double[]>) coords.clone();
-        double distMax = 0;
-        int    idmax1 = -55555;
-        int    idmax2 = -55555;
-        for ( Entry<Integer, double[]> entry1 : coords.entrySet()) {
-            for (Entry<Integer, double[]> entry2 : coord2.entrySet()) {
-                double distance = distance(entry1.getValue()[0], entry1.getValue()[1], entry2.getValue()[0], entry2.getValue()[1]);
-                if(distMax < distance){
-                    distMax = distance;
-                    idmax1 = entry1.getKey();
-                    idmax2 = entry2.getKey();
-                }
-            }
-        }
-        return distMax;
+    public void getPointDroite(double x1, double y1, double x2, double y2) {
+        Point p1 = new Point(x1, y1);
+        Point p2 = new Point(x2, y2);
+        this.pointDroit1 = p1;
+        this.pointDroit2 = p2;
+        int x = (int)((this.posy + this.posx * ((p2.getX() - p1.getX())/(p2.getY() - p1.getY())) - p1.getY() + p1.getX() * ((p2.getY() - p1.getY())/(p2.getX() - p1.getX()))) / ((p2.getY()-p1.getY())/(p2.getX()-p1.getX()) + (p2.getX()-p1.getX())/(p2.getY()-p1.getY())));
+		this.millieuDroite = new Point(
+			x,
+			(int)(x * ((p2.getY()-p1.getY())/(p2.getX()-p1.getX())) + p1.getY() - p1.getX() * ((p2.getY()-p1.getY())/(p2.getX()-p1.getX()))) 
+		);
     }
 
-    private double distance(double x1, double y1, double x2, double y2){
-        double x = Math.abs(x1-x2);
-        double y = Math.abs(y1-y2);
-        double res = Math.pow(x,2)+Math.pow(y,2);
-        res = Math.sqrt(res);
-        return res;
+    public Point getPointDroite1() {
+        return pointDroit1;
     }
 
-    public void setCoordDroite(double x1, double y1, double x2, double y2) {
-        coordPoint1 = new double[]{x1,y1};
-        coordPoint2 = new double[]{x2,y2};
-    }*/
+    public Point getPointDroite2() {
+        return pointDroit2;
+    }
 }

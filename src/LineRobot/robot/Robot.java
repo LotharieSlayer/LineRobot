@@ -36,7 +36,7 @@ public class Robot {
         thS = new ThreadServeur(this, serveur);
         thS.start();
         nbRobotMax = 0;
-        this.idRobot = (int) (Math.random()*5000) * -1;
+        this.idRobot = (int) (Math.random()*50000) * -1;
         this.posx    = Math.random()*500;
         this.posy    = Math.random()*500;
         this.rot     = Math.random()*360;
@@ -65,6 +65,9 @@ public class Robot {
 
 	public void setCoordsRobots(HashMap<Integer, double[]> coordsRobots) {
 		this.coordsRobots = coordsRobots;
+        this.coordsRobots.put(idRobot, new double[]{posx,posy});
+        calculDroite(this.coordsRobots);
+        sendMessage("droite");
 	}
 
     public void sendMessage(String message) {
@@ -75,6 +78,18 @@ public class Robot {
     public double getY      () { return this.posy   ; }
     public double getRot    () { return this.rot    ; }
     public int    getIdRobot() { return this.idRobot; }
+
+    public void setNbRobotMax(int nbRobotMax) {
+        this.nbRobotMax = nbRobotMax;
+    }
+
+    public void setBloquer(boolean bloquer) {
+        this.bloquer = bloquer;
+    }
+
+    public void setEloigner(boolean eloigner) {
+        this.eloigner = eloigner;
+    }
 
     public boolean isEloigner() { return this.eloigner; }
 
@@ -96,23 +111,27 @@ public class Robot {
     public double calculDroite(HashMap<Integer, double[]> coords) {
         HashMap<Integer, double[]> coord2 = (HashMap<Integer, double[]>) coords.clone();
         double distMax = 0;
+        int    idmax1 = -1;
+        int    idmax2 = -1;
         for ( Entry<Integer, double[]> entry1 : coords.entrySet()) {
             for (Entry<Integer, double[]> entry2 : coord2.entrySet()) {
                 double distance = distance(entry1.getValue()[0], entry1.getValue()[1], entry2.getValue()[0], entry2.getValue()[1]);
                 if(distMax < distance){
                     distMax = distance;
-                    if(entry1.getKey() == idRobot || entry2.getKey() == idRobot) {
-                        eloigner = true;
-                        bloquer = true;
-                    }
+                    idmax1 = entry1.getKey();
+                    idmax2 = entry2.getKey();
                 }
             }
             coord2.remove(entry1.getKey());
         }
+        if(idmax1 == idRobot || idmax2 == idRobot) {
+            bloquer  = true;
+            eloigner = true;
+        }
         return distMax;
     }
 
-    public static double distance(double x1, double y1, double x2, double y2){
+    private double distance(double x1, double y1, double x2, double y2){
         double x = Math.abs(x1-x2);
         double y = Math.abs(y1-y2);
         double res = Math.pow(x,2)+Math.pow(y,2);

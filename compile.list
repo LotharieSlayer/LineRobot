@@ -9,3 +9,4 @@
 ./src/LineRobot/robot/ThreadRobot.java
 ./src/LineRobot/robot/ThreadServeur.java
 ./src/LineRobot/robot/Calcul.java
+./src/LineRobot/robot/Point.java

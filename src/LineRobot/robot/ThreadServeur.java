@@ -24,6 +24,7 @@ public class ThreadServeur extends Thread{
             String message = serveur.getMessage();
             String[] args = message.split(";");
 
+            System.out.println();
             System.out.println("-----------------(" + robot.getIdRobot() + ")----------------------------");
             System.out.println(message);
 
@@ -31,32 +32,24 @@ public class ThreadServeur extends Thread{
 				robot.sendMessage("to:"+ args[0].split(":")[1] + ";Coord=X:"+robot.getX()+"|Y:"+robot.getY());
 			}
 
+            if(args[1].contains("existe")) {
+                if(robot.getIdRobot() == 1 && robot.getMillieuDroite() != null)
+                robot.sendMessage("to:"+ args[0].split(":")[1] +";droite;X:" + robot.getMillieuDroite().getX() + ";Y:" + robot.getMillieuDroite().getY());
+            }
 
-           if(robot.getIdRobot() == -1 || robot.getIdRobot() != Integer.parseInt(args[0].split(":")[1])) {
+
+            if(robot.getIdRobot() != Integer.parseInt(args[0].split(":")[1])) {
 
                 int idSender = Integer.parseInt(args[0].split(":")[1]);
 
                 if(args[1].contains("nouveau") ) {
                     robot.sendMessage("to:"+ args[0].split(":")[1] +";num="+(robot.getTotalRobotCo()+1));
-
-                    robot.setBloquer(false);
-                    robot.setEloigner(false);
-                    robot.sendMessage("coordonnee");
                 }
 
                 if(args[1].contains("maxR")) {
                     robot.setNbRobotMax(Integer.parseInt(args[1].split(":")[1].trim()));
+                    try { Thread.sleep(1500); } catch (InterruptedException e) {}
                 }
-				
-					/*if(robot.getTotalRobotCo() >= 2) {
-						robot.sendMessage("droite");
-					}*/
-                if(args[1].contains("droite")) {
-                    if(robot.isEloigner()){
-                        robot.sendMessage("to:"+ args[0].split(":")[1] + ";eloigner=X:"+robot.getX()+"|Y:"+robot.getY());
-                    }
-                }
-
 
 
                 if(args[1].startsWith("to:")){
@@ -69,29 +62,11 @@ public class ThreadServeur extends Thread{
                                     robot.sendMessage("maxR:" + robot.getIdRobot());
                                 }
                             }
-                            if(args[2].startsWith("Coord=")){
-                                String[] coord = args[2].substring("Coord=".length()).split("\\|");
-                                double x = Double.parseDouble(coord[0].split(":")[1]);
-                                double y = Double.parseDouble(coord[1].split(":")[1]);
-                                coords.put(Integer.parseInt(args[0].split(":")[1].trim()),new double[]{x,y});
-                                nombreRecu++;
-                                if(nombreRecu >= robot.getTotalRobotCo()-1) {
-                                   	robot.setCoordsRobots(coords);
-                                    coords = new HashMap<>();
-                                    nombreRecu = 0;
-                                }
-                            }
-                            if(args[2].startsWith("eloigner=")){
-                                System.out.println(args[2]);
-                                // String[] coord = args[2].substring("eloigner=".length()).split("\\|");
-                                // double x = Double.parseDouble(coord[0].split(":")[1]);
-                                // double y = Double.parseDouble(coord[1].split(":")[1]);
-                                // alcoords.add(new double[]{x,y});
-                                // nombreRecu++;
-                                // if(nombreRecu == 2) {
-                                //     robot.setCoordDroite(alcoords.get(0)[0], alcoords.get(0)[1], alcoords.get(1)[0], alcoords.get(1)[1]);
-                                //     nombreRecu = 0;
-                                // }
+                            if(args[2].startsWith("droite")){
+                                System.out.println("aa");
+                                double x = Double.parseDouble(args[3].split(":")[1]);
+                                double y = Double.parseDouble(args[4].split(":")[1]);
+                                robot.setCoordsmidDroite(x,y);
                             }
                         }
                     }

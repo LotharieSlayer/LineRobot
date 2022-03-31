@@ -2,7 +2,6 @@ package LineRobot;
 
 import java.io.IOException;
 
-import LineRobot.gui.GraphFrame;
 import LineRobot.robot.Robot;
 
 public class MainActivity {

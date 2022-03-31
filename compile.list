@@ -2,13 +2,10 @@
 -d bin
 
 ./src/LineRobot/MainActivity.java
-./src/LineRobot/Robot.java
 
+./src/LineRobot/robot/Robot.java
 ./src/LineRobot/robot/ServerR.java
 ./src/LineRobot/robot/SocketR.java
-./src/LineRobot/robot/ThreadR.java
-
-./src/LineRobot/gui/GraphFrame.java
-
-./src/LineRobot/gui/panels/GraphPanel.java
-./src/LineRobot/gui/panels/TracePanel.java
+./src/LineRobot/robot/ThreadRobot.java
+./src/LineRobot/robot/ThreadServeur.java
+./src/LineRobot/robot/Calcul.java

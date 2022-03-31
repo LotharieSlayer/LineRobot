@@ -6,6 +6,9 @@ import java.util.Map.Entry;
 public class Robot {
 
     private int idRobot;
+
+	private  HashMap<Integer, double[]> coordsRobots;
+
     private double[] coordPoint1;
     private double[] coordPoint2;
 
@@ -33,32 +36,38 @@ public class Robot {
         thS = new ThreadServeur(this, serveur);
         thS.start();
         nbRobotMax = 0;
-        this.idRobot = -1;
+        this.idRobot = (int) (Math.random()*5000) * -1;
         this.posx    = Math.random()*500;
         this.posy    = Math.random()*500;
         this.rot     = Math.random()*360;
+		coordsRobots = new HashMap<>();
 
-        sendMessage("nouveau");
+		do {
+			sendMessage("nouveau");	
+			try { Thread.sleep(1000); } catch (InterruptedException e) {}
+		} while (idRobot < 0);
 
-        //try { Thread.sleep(100); } catch (InterruptedException e) {}
-        
-        if( nbRobotMax < 2) {
-            sendMessage("coordonnee");
+		while (coordsRobots.size() < 1) {
+			sendMessage("coordonnee");	
+			try { Thread.sleep(1500); } catch (InterruptedException e) {}
+			
+		}
+            //try { Thread.sleep(100); } catch (InterruptedException e) {}
 
-            // try { Thread.sleep(100); } catch (InterruptedException e) {}
-
-            // sendMessage("droite");
+            //sendMessage("droite");
 
             // try { Thread.sleep(100); } catch (InterruptedException e) {}
 
             // double[] resultat = new Calcul(coordPoint1[0], coordPoint2[0], coordPoint1[1], coordPoint2[1]).calculPoints();
             // pointFinalx = resultat[0];
             // pointFinaly = resultat[1];
-        }
     }
 
+	public void setCoordsRobots(HashMap<Integer, double[]> coordsRobots) {
+		this.coordsRobots = coordsRobots;
+	}
+
     public void sendMessage(String message) {
-        try { Thread.sleep(100); } catch (InterruptedException e) {}
         client.sendMessage("id:"+idRobot+";"+message);
     }
 
@@ -77,8 +86,7 @@ public class Robot {
         return nbRobotMax;
     }
 
-    public synchronized void setNumRobot(int numRobot) {
-        System.out.println(numRobot);
+    public void setNumRobot(int numRobot) {
         if(numRobot > idRobot){
             idRobot = numRobot;
             nbRobotMax = numRobot;

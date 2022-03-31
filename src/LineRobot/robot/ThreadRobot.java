@@ -29,10 +29,10 @@ public class ThreadRobot extends Thread {
                 robot.stop();   
             }
             System.out.println("----------------------------------------");
-            System.out.println("robot " + robot.getIdRobot() + " = { x:" + robot.getX() + "; y:" + robot.getY());
-            System.out.println("Droite point1 = { x:" + robot.getPointDroite1().getX() + "; y:" + robot.getPointDroite1().getY() );
-            System.out.println("Droite point2 = { x:" + robot.getPointDroite2().getX() + "; y:" + robot.getPointDroite2().getY() );
-            System.out.println("droite = { x:" + robot.getMillieuDroite().getX() + "; y:" + robot.getMillieuDroite().getY());
+            System.out.println("Robot " + robot.getIdRobot() + " = { x:" + robot.getX() + "; y:" + robot.getY() + "}");
+            System.out.println("Droite point1 = { x:" + robot.getPointDroite1().getX() + "; y:" + robot.getPointDroite1().getY() + "}" );
+            System.out.println("Droite point2 = { x:" + robot.getPointDroite2().getX() + "; y:" + robot.getPointDroite2().getY() + "}" );
+            System.out.println("Arrivee = { x:" + robot.getMillieuDroite().getX() + "; y:" + robot.getMillieuDroite().getY() + "}");
             System.out.println("----------------------------------------");
             try { Thread.sleep(20); } catch (InterruptedException e) {}
         }

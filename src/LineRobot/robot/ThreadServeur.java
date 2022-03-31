@@ -39,8 +39,6 @@ public class ThreadServeur extends Thread{
                 if(args[1].contains("nouveau") ) {
                     robot.sendMessage("to:"+ args[0].split(":")[1] +";num="+(robot.getTotalRobotCo()+1));
 
-                    try { Thread.sleep(1000); } catch (InterruptedException e) {}
-
                     robot.setBloquer(false);
                     robot.setEloigner(false);
                     robot.sendMessage("coordonnee");
@@ -53,12 +51,11 @@ public class ThreadServeur extends Thread{
 					/*if(robot.getTotalRobotCo() >= 2) {
 						robot.sendMessage("droite");
 					}*/
-                // if(args[1].contains("droite")) {
-                //     System.out.println("couocou");
-                //     if(robot.isEloigner()){
-                //         robot.sendMessage("to:"+ args[0].split(":")[1] + ";eloigner=X:"+robot.getX()+"|Y:"+robot.getY());
-                //     }
-                // }
+                if(args[1].contains("droite")) {
+                    if(robot.isEloigner()){
+                        robot.sendMessage("to:"+ args[0].split(":")[1] + ";eloigner=X:"+robot.getX()+"|Y:"+robot.getY());
+                    }
+                }
 
 
 
@@ -84,17 +81,18 @@ public class ThreadServeur extends Thread{
                                     nombreRecu = 0;
                                 }
                             }
-                            /*if(args[2].startsWith("eloigner=")){
-                                String[] coord = args[2].substring("eloigner=".length()).split("\\|");
-                                double x = Double.parseDouble(coord[0].split(":")[1]);
-                                double y = Double.parseDouble(coord[1].split(":")[1]);
-                                alcoords.add(new double[]{x,y});
-                                nombreRecu++;
-                                if(nombreRecu == 2) {
-                                    robot.setCoordDroite(alcoords.get(0)[0], alcoords.get(0)[1], alcoords.get(1)[0], alcoords.get(1)[1]);
-                                    nombreRecu = 0;
-                                }
-                            } */
+                            if(args[2].startsWith("eloigner=")){
+                                System.out.println(args[2]);
+                                // String[] coord = args[2].substring("eloigner=".length()).split("\\|");
+                                // double x = Double.parseDouble(coord[0].split(":")[1]);
+                                // double y = Double.parseDouble(coord[1].split(":")[1]);
+                                // alcoords.add(new double[]{x,y});
+                                // nombreRecu++;
+                                // if(nombreRecu == 2) {
+                                //     robot.setCoordDroite(alcoords.get(0)[0], alcoords.get(0)[1], alcoords.get(1)[0], alcoords.get(1)[1]);
+                                //     nombreRecu = 0;
+                                // }
+                            }
                         }
                     }
                 }
